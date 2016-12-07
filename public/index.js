@@ -7,7 +7,7 @@ var app = function(){
   var countries = [];
   var container = document.getElementById('main-map');
   var center = {lat: 51.5, lng: -0.127758};
-  var zoomLevel = 10;
+  var zoomLevel = 4;
   map = new MapWrapper(container, center, zoomLevel);
 
   if (localStorage.length !== 0){
@@ -31,7 +31,13 @@ var displayCountryDetails = function() {
   img.src = "http://www.geonames.org/flags/x/" +countries[this.value].alpha2Code.toLowerCase() +".gif";
   var lat = countries[this.value].latlng[0];
   var lng = countries[this.value].latlng[1];
+
+  var marker = new google.maps.Marker({
+    position: {lat: lat, lng: lng},
+    map: map.googleMap
+  });
   map.googleMap.setCenter({lat: lat, lng: lng});
+  map.googleMap.setZoom(4);
 };
 
 
