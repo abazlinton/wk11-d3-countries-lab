@@ -20,17 +20,18 @@ var app = function(){
 };
 
 var displayCountryDetails = function() {
+  var selectedCountry = countries[this.value];
   var liName = document.getElementById('country-name');
-  liName.innerText = "Country Name: " + countries[this.value].name;
+  liName.innerText = "Country Name: " + selectedCountry.name;
   var liName = document.getElementById('country-population');
-  liName.innerText =  "Population: " +countries[this.value].population;
+  liName.innerText =  "Population: " + selectedCountry.population;
   var liName = document.getElementById('country-capital');
-  liName.innerText ="Capital: " + countries[this.value].capital;
+  liName.innerText ="Capital: " + selectedCountry.capital;
   localStorage["selectedCountryIndex"] = this.value;
   var img = document.getElementById("flag");
-  img.src = "http://www.geonames.org/flags/x/" +countries[this.value].alpha2Code.toLowerCase() +".gif";
-  var lat = countries[this.value].latlng[0];
-  var lng = countries[this.value].latlng[1];
+  img.src = "http://www.geonames.org/flags/x/" + selectedCountry.alpha2Code.toLowerCase() +".gif";
+  var lat = selectedCountry.latlng[0];
+  var lng = selectedCountry.latlng[1];
 
   var marker = new google.maps.Marker({
     position: {lat: lat, lng: lng},

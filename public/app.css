@@ -2,3 +2,9 @@
   height: 500px;
   width: 800px;
 }
+
+* {
+  font-family: system, -apple-system, BlinkMacSystemFont,
+        "Helvetica Neue", "Lucida Grande";
+
+}
