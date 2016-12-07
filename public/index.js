@@ -1,8 +1,14 @@
 var selectedCountryIndex = 5;
+var map = null;
+
 
 var app = function(){
   var url = "https://restcountries.eu/rest/v1/all";
   var countries = [];
+  var container = document.getElementById('main-map');
+  var center = {lat: 51.5, lng: -0.127758};
+  var zoomLevel = 10;
+  map = new MapWrapper(container, center, zoomLevel);
 
   if (localStorage.length !== 0){
     console.log("update from ls");
@@ -13,14 +19,19 @@ var app = function(){
   select.onchange = displayCountryDetails;
 };
 
-var displayCountryDetails = function functionName() {
+var displayCountryDetails = function() {
   var liName = document.getElementById('country-name');
-  liName.innerText = countries[this.value].name;
+  liName.innerText = "Country Name: " + countries[this.value].name;
   var liName = document.getElementById('country-population');
-  liName.innerText = countries[this.value].population;
+  liName.innerText =  "Population: " +countries[this.value].population;
   var liName = document.getElementById('country-capital');
-  liName.innerText = countries[this.value].capital;
+  liName.innerText ="Capital: " + countries[this.value].capital;
   localStorage["selectedCountryIndex"] = this.value;
+  var img = document.getElementById("flag");
+  img.src = "http://www.geonames.org/flags/x/" +countries[this.value].alpha2Code.toLowerCase() +".gif";
+  var lat = countries[this.value].latlng[0];
+  var lng = countries[this.value].latlng[1];
+  map.googleMap.setCenter({lat: lat, lng: lng});
 };
 
 
